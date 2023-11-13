@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
+// Import the Home component which contains the bottom tabs
+import Home from './screens/home'; // Make sure the path is correct based on your project structure
+import LoginScreen from './screens/LoginScreen';
+
+// Create the stack navigator
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+        {/* 
+          The Home screen is now the entry point to the bottom tab navigator.
+          The individual screens are now removed from here because they are included within the Home component's tab navigator.
+        */}
+        <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
