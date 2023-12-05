@@ -1,4 +1,3 @@
-// LoginScreen.js
 import React, { useState } from 'react';
 import {
   View,
@@ -10,23 +9,27 @@ import {
   Image
 } from 'react-native';
 
-const LoginScreen = ({ navigation }) => { // Make sure to receive the navigation prop here
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   // Test credentials, replace with your authentication logic
   const testCredentials = {
-    email: 'testuser@example.com',
-    password: 'testpassword',
+    email: 'test@test.com',
+    password: 'test',
   };
 
   const handleLogin = () => {
     if (email === testCredentials.email && password === testCredentials.password) {
-      // Navigate to the Home screen if login is successful
-      navigation.replace('Home'); // Using replace so the user can't go back to the login screen with the Android back button
+      navigation.replace('Home');
     } else {
       Alert.alert('Login Failed', 'Incorrect email or password.');
     }
+  };
+
+  // Function to navigate to the registration screen
+  const handleCreateAccount = () => {
+    navigation.navigate('Registration');
   };
 
   return (
@@ -52,7 +55,11 @@ const LoginScreen = ({ navigation }) => { // Make sure to receive the navigation
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Sign In</Text>
       </TouchableOpacity>
-      {/* ... other components ... */}
+
+      {/* "Create an Account" button */}
+      <TouchableOpacity style={styles.createAccountButton} onPress={handleCreateAccount}>
+        <Text style={styles.createAccountButtonText}>Create an Account</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -62,7 +69,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f0f0f0', // Set your desired solid background color here
+    backgroundColor: '#f0f0f0',
   },
   logo: {
     width: 100,
@@ -96,11 +103,17 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
   },
-  orText: {
-    color: 'black',
-    marginVertical: 10,
+  createAccountButton: {
+    width: '80%',
+    padding: 15,
+    backgroundColor: '#800080', // Set your desired button color here
+    alignItems: 'center',
+    borderRadius: 5,
+  },
+  createAccountButtonText: {
+    color: 'white',
+    fontSize: 18,
   },
 });
 
-// Make sure to replace './path-to-your-logo.png' with the actual path to your logo image
 export default LoginScreen;

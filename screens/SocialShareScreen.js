@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, Button, StyleSheet, Share } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Share } from 'react-native';
 
 const SocialShareScreen = () => {
     const [favorites, setFavorites] = useState([
         { id: '1', name: 'Sushi Platter' },
         { id: '2', name: 'Classic Cheeseburger' },
+        { id: '3', name: 'Vegetarian Pizza' },
+        { id: '4', name: 'Spicy Ramen' },
         // ... more favorites
     ]);
 
     const onShare = async (item) => {
         try {
-            const result = await Share.share({
+            await Share.share({
                 message: `Check out this dish I love on Crave: ${item.name}`,
             });
         } catch (error) {
@@ -30,8 +32,18 @@ const SocialShareScreen = () => {
                 renderItem={({ item }) => (
                     <View style={styles.item}>
                         <Text style={styles.title}>{item.name}</Text>
-                        <Button title="Share" onPress={() => onShare(item)} />
-                        <Button title="Remove from Favorites" onPress={() => removeFromFavorites(item.id)} />
+                        <View style={styles.buttons}>
+                            <TouchableOpacity 
+                                style={styles.button}
+                                onPress={() => onShare(item)}>
+                                <Text style={styles.buttonText}>Share</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity 
+                                style={[styles.button, styles.removeButton]}
+                                onPress={() => removeFromFavorites(item.id)}>
+                                <Text style={styles.buttonText}>Remove</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 )}
             />
@@ -43,9 +55,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 22,
+        backgroundColor: '#f0f0f0',
     },
     item: {
-        padding: 10,
+        backgroundColor: '#fff',
+        padding: 15,
         borderBottomWidth: 1,
         borderBottomColor: '#cccccc',
         flexDirection: 'row',
@@ -54,6 +68,22 @@ const styles = StyleSheet.create({
     },
     title: {
         fontWeight: 'bold',
+    },
+    buttons: {
+        flexDirection: 'row',
+    },
+    button: {
+        marginLeft: 10,
+        paddingHorizontal: 15,
+        paddingVertical: 8,
+        backgroundColor: '#007bff',
+        borderRadius: 4,
+    },
+    removeButton: {
+        backgroundColor: '#dc3545',
+    },
+    buttonText: {
+        color: '#fff',
     },
 });
 

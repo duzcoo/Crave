@@ -15,7 +15,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.duzcoo.crav"
     },
     "android": {
       "adaptiveIcon": {
@@ -30,7 +31,8 @@
     "extra": {
       "eas": {
         "projectId": "0766e5e8-6e0c-4d6d-a33d-f7e6a0afa1a5"
-      }
+      },
+      "yelpApiKey": "-e5XaNEWPdxuSa0QQE31xdyuWSdm2mdObMDaRi2Nejn0xIja_xqz5BOa7wCmSn5WaUt6nBXREwwvhugnHAsPkJ2-14HC6oDQkgrrTPyr-0C3l3Dv_wZpJfhr8VxlZXYx"
     }
   }
 }
